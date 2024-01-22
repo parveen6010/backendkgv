@@ -56,6 +56,15 @@ app.post("/register", async (req, resp) => {
 function sendEmailNotification(formData) {
   const {email} = formData;
   const transporter = nodemailer.createTransport({
+    host: "smtpout.secureserver.net",
+    secure: true,
+    secureConnection: false, // TLS requires secureConnection to be false
+    tls: {
+      ciphers: 'SSLv3'
+    },
+    requireTLS: true,
+    port: 465,
+    debug: true,
     service: "Godaddy",
     auth: {
       user: "team@kgvl.co.in", // Update with your Gmail address
@@ -89,30 +98,4 @@ function sendEmailNotification(formData) {
 
 
 
-
-
-// // app.js
-// import express from "express";
-// import { config } from "dotenv";
-// import { Contact } from "./models/contact.js"; // Import the named export
-// import paymentRoutes from "./routes/paymentRoutes.js";
-
-// import cors from "cors";
-// config({ path: "./config/config.env" });
-// export const app = express();
-// app.use(cors());
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
-
-// app.use("/api", paymentRoutes);
-
-// app.get("/api/getkey", (req, res) =>
-//   res.status(200).json({ key: process.env.RAZORPAY_API_KEY })
-// );
-
-// app.post("/register", async (req, resp) => {
-//   let contact = new Contact(req.body);
-//   let result = await contact.save();
-//   resp.send(result);
-// });
 
