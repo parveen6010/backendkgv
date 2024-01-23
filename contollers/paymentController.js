@@ -81,7 +81,7 @@ export const paymentVerification = async (req, res) => {
                 function sendEmailNotification() {
                   const transporter = nodemailer.createTransport({
                     host: "smtpout.secureserver.net",
-                    secure: false,
+                    secure: true,
                     port: 465,
                     service:" GoDaddy",
                     auth: {
