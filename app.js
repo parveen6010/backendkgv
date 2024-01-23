@@ -47,7 +47,7 @@ app.post("/register", async (req, resp) => {
         host: "smtpout.secureserver.net",
         secure: false,
         port: 465,
-        service: 'Godaddy',
+        service:" GoDaddy",
         auth: {
           user: "team@kgvl.co.in",
           pass: "Team@12345",
@@ -69,14 +69,11 @@ app.post("/register", async (req, resp) => {
     
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
-          console.error("Email error:", error);
-          res.status(500).send("Error sending email");
+          console.log("Email error: " + error);
         } else {
-          console.log("Email sent:", info.response);
-          res.status(200).send(result); // Send a response after successful email sending
+          console.log("Email sent: " + info.response);
         }
       });
-      
     }
     
 
