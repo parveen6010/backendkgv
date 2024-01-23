@@ -96,7 +96,7 @@ export const paymentVerification = async (req, res) => {
                       from: "team@kgvl.co.in",
                       to: "sales@kgvl.co.in",
                       subject: "Customer booking Detail",
-                      html: `<p>New registration details11:</p>
+                      html: `<p>New registration details:</p>
                       <p>Name: ${firstname}</p>
                        <p>Lastname: ${lastname}</p>
                        <p>Email: ${email}</p>
@@ -111,7 +111,7 @@ export const paymentVerification = async (req, res) => {
                         from: "team@kgvl.co.in",
                         to: email,
                         subject: "Customer booking Detail",
-                        html: `<p>New registration details11:</p>
+                        html: `<p>New registration details:</p>
                         <p>Name: ${firstname}</p>
                          <p>Lastname: ${lastname}</p>
                          <p>Email: ${email}</p>
