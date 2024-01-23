@@ -40,6 +40,46 @@ app.post("/register", async (req, resp) => {
        console.log(req.body);
        
     // Send email notification
+
+    function sendEmailNotification(formData) {
+      const { email } = formData;
+      const transporter = nodemailer.createTransport({
+        host: "smtpout.secureserver.net",
+        secure: false,
+        port: 465,
+        service: 'Godaddy',
+        auth: {
+          user: "team@kgvl.co.in",
+          pass: "Team@12345",
+        },
+      });
+      
+    
+      const mailOptions = {
+        from: "team@kgvl.co.in",
+        to: email,
+        subject: "New Registration",
+        html: `<p>New registration details:</p>
+               <p>Name: ${formData.name}</p>
+               <p>Lastname: ${formData.lastname}</p>
+               <p>Email: ${formData.email}</p>
+               <p>Address: ${formData.address}</p>
+               <p>Query: ${formData.query}</p>`,
+      };
+    
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.error("Email error:", error);
+          res.status(500).send("Error sending email");
+        } else {
+          console.log("Email sent:", info.response);
+          res.status(200).send(result); // Send a response after successful email sending
+        }
+      });
+      
+    }
+    
+
     sendEmailNotification(req.body);
 
     resp.send(result);
@@ -50,49 +90,51 @@ app.post("/register", async (req, resp) => {
 });
 
 
+// host: "smtpout.secureserver.net",
+// secure: true,
+// secureConnection: false, // TLS requires secureConnection to be false
+// tls: {
+//   ciphers: 'SSLv3'
+// },
+// requireTLS: true,
+// port: 465,
+// debug: true,
 
 // Function to send email notification
 
-function sendEmailNotification(formData) {
-  const {email} = formData;
-  const transporter = nodemailer.createTransport({
-    host: "smtpout.secureserver.net",
-    secure: true,
-    secureConnection: false, // TLS requires secureConnection to be false
-    tls: {
-      ciphers: 'SSLv3'
-    },
-    requireTLS: true,
-    port: 465,
-    debug: true,
-    service: "Godaddy",
-    auth: {
-      user: "team@kgvl.co.in", // Update with your Gmail address
-      pass: "Team@12345", // Update with your Gmail password
-    },
-  });
-
-  const mailOptions = {
-    from: "team@kgvl.co.in",
-    to: email,
-    subject: "New Registration",
-    html: `<p>New registration details:</p>
-           <p>Name: ${formData.name}</p>
-           <p>Lastname: ${formData.lastname}</p>
-           <p>Email: ${formData.email}</p>
-           <p>Address: ${formData.address}</p>
-           <p>Query: ${formData.query}</p>`,
-  };
+// function sendEmailNotification(formData) {
+//   const {email} = formData;
+//   const transporter = nodemailer.createTransport({
 
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log("Email error: " +error);
-    } else {
-      console.log("Email sent: " + info.response);
-    }
-  });
-}
+//     service: "Godaddy",
+//     auth: {
+//       user: "team@kgvl.co.in", // Update with your Gmail address
+//       pass: "Team@12345", // Update with your Gmail password
+//     },
+//   });
+
+//   const mailOptions = {
+//     from: "team@kgvl.co.in",
+//     to: email,
+//     subject: "New Registration",
+//     html: `<p>New registration details:</p>
+//            <p>Name: ${formData.name}</p>
+//            <p>Lastname: ${formData.lastname}</p>
+//            <p>Email: ${formData.email}</p>
+//            <p>Address: ${formData.address}</p>
+//            <p>Query: ${formData.query}</p>`,
+//   };
+
+
+//   transporter.sendMail(mailOptions, function (error, info) {
+//     if (error) {
+//       console.log("Email error: " +error);
+//     } else {
+//       console.log("Email sent: " + info.response);
+//     }
+//   });
+// }
 
 
 
