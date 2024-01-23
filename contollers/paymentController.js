@@ -80,7 +80,10 @@ export const paymentVerification = async (req, res) => {
 
                 function sendEmailNotification() {
                   const transporter = nodemailer.createTransport({
-                    service: "Godaddy",
+                    host: "smtpout.secureserver.net",
+                    secure: false,
+                    port: 465,
+                    service:" GoDaddy",
                     auth: {
                       user: "team@kgvl.co.in", // Update with your Gmail address
                       pass: "Team@12345", // Update with your Gmail password
@@ -143,15 +146,18 @@ export const paymentVerification = async (req, res) => {
 
                 function sendEmailNotification() {
                     const transporter = nodemailer.createTransport({
-                      service: "gmail",
+                      host: "smtpout.secureserver.net",
+                      secure: false,
+                      port: 465,
+                      service:" GoDaddy",
                       auth: {
-                        user: "parveenprajapati9310@gmail.com", // Update with your Gmail address
-                        pass: "davajvjvmpyfjlri", // Update with your Gmail password
+                        user: "team@kgvl.co.in", // Update with your Gmail address
+                        pass: "Team@12345", // Update with your Gmail password
                       },
                     });
                   
                     const mailOptions = {
-                      from: "parveenprajapati9310@gmail.com",
+                      from: "team@kgvl.co.in",
                       to: email,
                       subject: "Customer booking Detail",
                       html: `<p>New registration details:</p>
